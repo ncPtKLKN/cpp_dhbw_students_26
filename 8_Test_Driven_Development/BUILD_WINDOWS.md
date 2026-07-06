@@ -1,10 +1,6 @@
 # Build- und Run-Befehle (Windows, VS Code, CMake)
 
-## Projektordner
-
-```powershell
-cd C:\PandaLehre\cpp_dhbw\02_lecture\8_Test_Driven_Development\81_Motivation
-```
+> Wechseln Sie in den jeweiligen Ordner (z. B. `8_Test_Driven_Development/81_Motivation`) und führen Sie die Befehle in einer PowerShell aus.
 
 ## Variante 1: Ninja
 

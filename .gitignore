@@ -1,5 +1,7 @@
 # Build artifacts
 build/
+build-*/
+cmake-build-*/
 dist/
 *.o
 *.a

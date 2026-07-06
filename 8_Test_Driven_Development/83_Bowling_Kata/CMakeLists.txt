@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Name des Projekts/Targets, damit wir ihn unten mehrfach wiederverwenden koennen.
-set(This facultyCalulator)
+set(This bowling_kata)
 
 project(${This})
 
@@ -25,23 +25,21 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 
-# Add executable
-# Hauptprogramm (Produktionscode)
-add_executable(${This} src/main.cpp src/factorial.cpp)
-# Header-Dateien aus inc/ fuer dieses Target sichtbar machen.
-target_include_directories(${This} PUBLIC inc)
-
-
-# Add test
 # CTest-Unterstuetzung aktivieren.
-include(ctest)
 enable_testing()
 
-# Eigenes Test-Binary mit Testcode + zu testendem Produktionscode.
-add_executable(${This}Test test/test_main.cpp src/factorial.cpp)
-target_include_directories(${This}Test PUBLIC inc)
-# Linkt GoogleTest inkl. main()-Einstiegspunkt fuer Tests.
-target_link_libraries(${This}Test GTest::gtest_main)
-include(GoogleTest)
-# Registriert jeden TEST(...) Fall als einzelnen CTest-Test.
-gtest_discover_tests(${This}Test)
+set(Headers
+    src/game.hpp
+)
+
+set(Sources
+    src/game.cpp
+)
+
+# Produktionscode als eigene Bibliothek.
+add_library(${This} STATIC ${Sources} ${Headers})
+add_subdirectory(test)
+
+# Kleines Konsolenprogramm zum manuellen Ausprobieren der Kata-Logik.
+add_executable(${This}_app src/main.cpp)
+target_link_libraries(${This}_app PRIVATE ${This})
